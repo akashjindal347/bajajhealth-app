@@ -19,6 +19,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  font_awesome_flutter:
+  graphql_flutter: 1.0.0+4
+  shared_preferences:
+  scoped_model:
+  intl:
+  flutter_local_notifications:
+  data_connection_checker:
+  flutter_svg:
+  undraw:
+  table_calendar:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,8 +51,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+   - assets/img/branding/header.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -56,6 +66,42 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+  - family: Poppins
+    fonts:
+      - asset: assets/fonts/poppins/Poppins-Thin.otf
+      - asset: assets/fonts/poppins/Poppins-Light.otf
+      - asset: assets/fonts/poppins/Poppins-Regular.otf
+      - asset: assets/fonts/poppins/Poppins-Medium.otf
+      - asset: assets/fonts/poppins/Poppins-SemiBold.otf
+      - asset: assets/fonts/poppins/Poppins-Bold.otf
+  - family: 'PT Sans'
+    fonts:
+      - asset: assets/fonts/PTsans/PTC55F.ttf
+      - asset: assets/fonts/PTsans/PTC75F.ttf
+      - asset: assets/fonts/PTsans/PTN57F.ttf
+      - asset: assets/fonts/PTsans/PTN77F.ttf
+      - asset: assets/fonts/PTsans/PTS55F.ttf
+      - asset: assets/fonts/PTsans/PTS56F.ttf
+      - asset: assets/fonts/PTsans/PTS75F.ttf
+      - asset: assets/fonts/PTsans/PTS76F.ttf
+  - family: 'Raleway'
+    fonts:
+      - asset: assets/fonts/Raleway/Raleway-Regular.ttf
+      - asset: assets/fonts/Raleway/Raleway-Medium.ttf
+      - asset: assets/fonts/Raleway/Raleway-SemiBold.ttf
+      - asset: assets/fonts/Raleway/Raleway-Thin.ttf
+      - asset: assets/fonts/Raleway/Raleway-Light.ttf
+  - family: 'Comfortaa'
+    fonts:
+      - asset: assets/fonts/Comfortaa/Comfortaa-Regular.ttf
+      - asset: assets/fonts/Comfortaa/Comfortaa-Light.ttf
+      - asset: assets/fonts/Comfortaa/Comfortaa-SemiBold.ttf
+      - asset: assets/fonts/Comfortaa/Comfortaa-Bold.ttf
+      - asset: assets/fonts/Comfortaa/Comfortaa-Thin.ttf
+  - family: 'Righteous'
+    fonts:
+      - asset: assets/fonts/Righteous/Righteous-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

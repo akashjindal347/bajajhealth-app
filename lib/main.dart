@@ -1,26 +1,73 @@
+import 'package:bajajhealthapp/utils/baseTheme.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'dart:convert';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-class MyApp extends StatelessWidget {
+import './Models/AppModel.dart';
+
+import './Components/Auth/AuthPage.dart';
+import './Components/pedestal.dart';
+import 'Components/Home.dart';
+
+Future<void> main() async {
+  
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var savedToken = await prefs.getString('token');
+  var savedUserId = await prefs.getString('userId');
+  var savedUserInfoString = await prefs.getString('userInfo');
+  var savedUserInfo = savedUserInfoString != null ? json.decode(savedUserInfoString) : null;
+
+  runApp(
+    ScopedModel<AppModel>(
+      model: AppModel(),
+      child: ScopedModelDescendant<AppModel>(
+        builder: (context, child, model) => BajajHealthApp(token: savedToken != null ? savedToken : model.token, userId: savedUserId != null ? savedUserId : model.userId, userInfo: savedUserInfo != null ? savedUserInfo : model.userInfo)
+      )
+    )
+  );
+}
+
+class BajajHealthApp extends StatelessWidget {
   // This widget is the root of your application.
+  final String token;
+  final String userId;
+  final Map<String, dynamic> userInfo;
+  BajajHealthApp({this.token, this.userId, this.userInfo});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    HttpLink link;
+    String graphqlUri = 'https://edzofitapi.herokuapp.com/graphql';
+    if (token == null) {
+      link = HttpLink(uri: graphqlUri);
+    } else {
+      link = HttpLink(
+          uri: graphqlUri, headers: {"authorization": "Bearer $token"});
+    }
+
+    final ValueNotifier<GraphQLClient> client = ValueNotifier<GraphQLClient>(
+        GraphQLClient(link: link as Link,
+            cache: InMemoryCache())
+    );
+
+    return GraphQLProvider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Bajaj Health',
+        theme: baseTheme(),
+        home: token == null ? Home() : Pedestal(),
+        routes: {
+          '/auth': (BuildContext context) => AuthPage(),
+          '/home': (BuildContext context) => Home(),
+          '/pedestal': (BuildContext context) => Pedestal(),
+        },
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      client: client,
     );
   }
 }
