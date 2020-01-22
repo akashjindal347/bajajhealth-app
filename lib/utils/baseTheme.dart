@@ -14,6 +14,7 @@ ThemeData baseTheme () {
   return base.copyWith(
     textTheme: _baseTextTheme(base.textTheme),
     primaryColor: Color(0xFF089BAB),
+    scaffoldBackgroundColor: Color(0xFFEBF3F5),
     secondaryHeaderColor: Color(0xFFFED892),
     accentColor: Color(0xFFFD8369)
   );
