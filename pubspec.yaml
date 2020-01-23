@@ -99,6 +99,7 @@ flutter:
       - asset: assets/fonts/Montserrat/Montserrat-Regular.otf
       - asset: assets/fonts/Montserrat/Montserrat-Light.otf
       - asset: assets/fonts/Montserrat/Montserrat-SemiBold.otf
+      - asset: assets/fonts/Montserrat/Montserrat-Medium.otf
       - asset: assets/fonts/Montserrat/Montserrat-Bold.otf
       - asset: assets/fonts/Montserrat/Montserrat-Thin.otf
   - family: 'Comfortaa'

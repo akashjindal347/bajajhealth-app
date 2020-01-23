@@ -1,4 +1,6 @@
+import 'package:bajajhealthapp/Components/Bajar/Bajar.dart';
 import 'package:bajajhealthapp/Components/Elements/BottomBar.dart';
+import 'package:bajajhealthapp/Components/Journal.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -39,7 +41,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+        child: AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16), )
         ),
@@ -69,8 +73,9 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+      ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height * 0.93,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
@@ -99,13 +104,14 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                    child: Journal()
+                    child: Journal(),
                   ),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
+                    child: Bajar(),
                   ),
                   Container(
                     decoration: BoxDecoration(
