@@ -4,6 +4,8 @@ import 'package:bajajhealthapp/Components/Journal.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import './Journal.dart';
+
 import './Dashboard.dart';
 
 class Home extends StatefulWidget {
@@ -50,7 +52,7 @@ class _HomeState extends State<Home> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/img/branding/header.png'),
+            Image.asset('/assets/img/dashboard/person.png'),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
@@ -95,6 +97,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(23)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
+                    child: Dashboard(),
                   ),
                   Container(
                     decoration: BoxDecoration(

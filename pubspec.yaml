@@ -100,7 +100,11 @@ flutter:
       - asset: assets/fonts/Montserrat/Montserrat-Light.otf
       - asset: assets/fonts/Montserrat/Montserrat-SemiBold.otf
 <<<<<<< HEAD
+<<<<<<< HEAD
       - asset: assets/fonts/Montserrat/Montserrat-Medium.otf
+=======
+      - asset: assets/fonts/Montserrat/Montserrat-Bold.otf
+>>>>>>> 1d44f27e2aaf464b03a2d2f4d0b9cb66dd9b40a8
 =======
       - asset: assets/fonts/Montserrat/Montserrat-Bold.otf
 >>>>>>> 1d44f27e2aaf464b03a2d2f4d0b9cb66dd9b40a8
