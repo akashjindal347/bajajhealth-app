@@ -53,6 +53,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/img/branding/header.png
+   - assets/img/dashboard/blob.png
+   - assets/img/dashboard/person.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -97,7 +99,11 @@ flutter:
       - asset: assets/fonts/Montserrat/Montserrat-Regular.otf
       - asset: assets/fonts/Montserrat/Montserrat-Light.otf
       - asset: assets/fonts/Montserrat/Montserrat-SemiBold.otf
+<<<<<<< HEAD
       - asset: assets/fonts/Montserrat/Montserrat-Medium.otf
+=======
+      - asset: assets/fonts/Montserrat/Montserrat-Bold.otf
+>>>>>>> 1d44f27e2aaf464b03a2d2f4d0b9cb66dd9b40a8
       - asset: assets/fonts/Montserrat/Montserrat-Thin.otf
   - family: 'Comfortaa'
     fonts:
