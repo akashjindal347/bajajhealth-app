@@ -92,6 +92,13 @@ flutter:
       - asset: assets/fonts/Raleway/Raleway-SemiBold.ttf
       - asset: assets/fonts/Raleway/Raleway-Thin.ttf
       - asset: assets/fonts/Raleway/Raleway-Light.ttf
+  - family: 'Montserrat'
+    fonts:
+      - asset: assets/fonts/Montserrat/Montserrat-Regular.otf
+      - asset: assets/fonts/Montserrat/Montserrat-Light.otf
+      - asset: assets/fonts/Montserrat/Montserrat-SemiBold.otf
+      - asset: assets/fonts/Montserrat/Montserrat-Medium.otf
+      - asset: assets/fonts/Montserrat/Montserrat-Thin.otf
   - family: 'Comfortaa'
     fonts:
       - asset: assets/fonts/Comfortaa/Comfortaa-Regular.ttf
