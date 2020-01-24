@@ -1,12 +1,16 @@
+import 'package:bajajhealthapp/Components/Analysis.dart';
 import 'package:bajajhealthapp/Components/Bajar/Bajar.dart';
 import 'package:bajajhealthapp/Components/Elements/BottomBar.dart';
+import 'package:bajajhealthapp/Components/Friends.dart';
 import 'package:bajajhealthapp/Components/Journal.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Journal.dart';
-
+import '../Models/AppModel.dart';
 import './Dashboard.dart';
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   @override
@@ -17,6 +21,11 @@ class _HomeState extends State<Home> {
   
   int index = 0;
   PageController homePageController;
+
+  String gToken;
+  String token;
+  String userId;
+  String userInfo;
 
   changeIndex (int indx) {
     setState(() {
@@ -31,15 +40,75 @@ class _HomeState extends State<Home> {
     });
   }
 
+  setData () {
+    setState(() {
+      id: ScopedModel.of<AppModel>(context).userId;
+      token: ScopedModel.of<AppModel>(context).token;
+      gToken: ScopedModel.of<AppModel>(context).gToken;
+      userInfo: ScopedModel.of<AppModel>(context).userInfo;
+    });
+  }
+
+  setModel () async {
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // print('Prefered Token');
+    // print(preferences.getString('token'));
+    GraphQLProvider.of(context).value.query(
+      QueryOptions(document: """
+        query getUser {
+            getUser {
+              id
+              name
+              dateCreated
+              email
+              height
+              weight
+              bmi
+              healthIndex
+              status
+              gToken
+            }
+          }
+      """)
+    ).then((res) async {
+      if(res.errors != null) {
+        print('Error getting user data: ');
+        print(res.errors);
+        return;
+      }
+      else { 
+        print('Success logging in: ');
+        print(res.data);
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        preferences.setString('userInfo', json.encode(res.data));
+        ScopedModel.of<AppModel>(context).setUserInfo(res.data);
+        if(ScopedModel.of<AppModel>(context).token == null) {
+          var savedToken = preferences.getString('token');
+          var savedUserId = preferences.getString('userId');
+          var gToken = preferences.getString('gToken');
+          ScopedModel.of<AppModel>(context).setToken(savedToken);
+          ScopedModel.of<AppModel>(context).setUserId(savedUserId);
+          ScopedModel.of<AppModel>(context).setgToken(gToken);
+        }
+      }
+    });
+    setData();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     homePageController = new PageController();
+    Future.delayed(Duration(milliseconds: (600)), () {
+      setModel();
+    });
   }
   
   @override
   Widget build(BuildContext context) {
+    print('Not so Scoped');
+    print(ScopedModel.of<AppModel>(context).gToken);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
@@ -118,12 +187,14 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
+                    child: Friends(),
                   ),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
+                    child: Analysis(),
                   ),
                 ],
               ),

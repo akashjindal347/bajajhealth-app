@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "184299670964",
+    "firebase_url": "https://bajajhealthapp.firebaseio.com",
+    "project_id": "bajajhealthapp",
+    "storage_bucket": "bajajhealthapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184299670964:android:55472c229ca2573ba876e1",
+        "android_client_info": {
+          "package_name": "com.example.bajajhealthapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184299670964-e4oe1p29pfh9r6a0a78j6o3emqh3n1m8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bajajhealthapp",
+            "certificate_hash": "7a89e799614a6e883f01ef1e97612a9d8b84c172"
+          }
+        },
+        {
+          "client_id": "184299670964-jr6gt6v53q1ejgv74686m5eoulb8hp12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsge132Vh90gJ-QYdlsqspcdbipmOxfjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "184299670964-jr6gt6v53q1ejgv74686m5eoulb8hp12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

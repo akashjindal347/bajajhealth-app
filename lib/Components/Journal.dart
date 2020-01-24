@@ -384,6 +384,21 @@ class _JournalState extends State<Journal> {
                         ]
                       )
                     ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      MaterialButton(
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.add_circle_outline,
+                          size: 24,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),
