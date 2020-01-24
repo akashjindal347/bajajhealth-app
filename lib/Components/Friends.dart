@@ -401,9 +401,9 @@ class _FriendsState extends State<Friends> {
                               ),
                             ),
                             AnimatedContainer(
-                              // alignment: Alignment.centerLeft,
+                              alignment: Alignment(-0.75,0),
                               duration: Duration(milliseconds: 500),
-                              padding: challengeSelection == 'Completed' ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.25) : EdgeInsets.only(left: 0),
+                              padding: challengeSelection == 'Completed' ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.335) : EdgeInsets.only(left: 0),
                               child: Container(
                                 height: 30,
                                 width: MediaQuery.of(context).size.width * 0.25,
