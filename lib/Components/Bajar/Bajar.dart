@@ -41,11 +41,136 @@ searchSet (String text) {
 
   
   String challengeSelection = 'Ongoing';
+  int grid=0;
 
   changeChallengeSelection (String selection) {
     setState(() {
       challengeSelection = selection;
     });
+  }
+
+  changeGrid(int gridselected){
+    setState((){
+         grid= gridselected;
+    }
+
+    );
+  }
+
+  Widget GridSelector () {
+    if (grid == 1) {
+      return GridView.builder(
+              scrollDirection: Axis.vertical,
+            itemCount:20,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
+            itemBuilder: (BuildContext context, int index){
+
+              return Container(
+                decoration: BoxDecoration(
+                  shape:BoxShape.rectangle,
+                   color:Colors.white,
+                   borderRadius: BorderRadius.all(Radius.circular(16)),
+                      boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 0),
+                                    color: Color(0x668CC598),
+                                    blurRadius: 5
+                                  )
+                                ]
+                ),
+                
+                 child: Column(
+                   mainAxisSize: MainAxisSize.max,
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   children: <Widget>[
+                   
+                   
+                    CircleAvatar(
+                      radius: 40,
+
+                    ),
+                    Text('ITEM',
+                    style: TextStyle(fontSize: 25),),
+                    Text('cost',
+                    style:TextStyle(fontSize: 20)),
+              //           Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Text('Nutrients & Suplements',
+              //   style: TextStyle(fontSize: 15),),
+              // )
+                
+
+                 ],
+                 ),
+                 
+
+                  
+              );
+            }
+
+
+          
+
+
+        );
+  
+    }
+    else {
+      return GridView.builder(
+              scrollDirection: Axis.vertical,
+            itemCount:20,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
+            itemBuilder: (BuildContext context, int index){
+
+              return Container(
+                decoration: BoxDecoration(
+                  shape:BoxShape.rectangle,
+                   color:Colors.white,
+                   borderRadius: BorderRadius.all(Radius.circular(16)),
+                      boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 0),
+                                    color: Color(0x668CC598),
+                                    blurRadius: 5
+                                  )
+                                ]
+                ),
+                
+                 child: Column(
+                   mainAxisSize: MainAxisSize.max,
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   children: <Widget>[
+                   
+                   
+                    CircleAvatar(
+                      radius: 40,
+
+                    ),
+                    Text('ITE',
+                    style: TextStyle(fontSize: 25),),
+                    Text('cost',
+                    style:TextStyle(fontSize: 20)),
+              //           Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Text('Nutrients & Suplements',
+              //   style: TextStyle(fontSize: 15),),
+              // )
+                
+
+                 ],
+                 ),
+                 
+
+                  
+              );
+            }
+
+          
+
+
+        );
+  
+    }
   }
 
 
@@ -124,7 +249,8 @@ searchSet (String text) {
                                             fontSize: 18
                                           ),
                                         ),
-                                        onPressed: () {changeChallengeSelection('Ongoing');},
+                                        onPressed: () {changeChallengeSelection('Ongoing');
+                                                        changeGrid(0);},
                                       ),
                                     ),
                                   ),
@@ -139,7 +265,8 @@ searchSet (String text) {
                                             fontSize: 16.125
                                           ),
                                         ),
-                                        onPressed: () {changeChallengeSelection('Completed');},
+                                        onPressed: () {changeChallengeSelection('Completed');
+                                                        changeGrid(1);},
                                       ),
                                     )
                                   )
@@ -183,61 +310,8 @@ searchSet (String text) {
               height: MediaQuery.of(context).size.height *0.65,
           width: MediaQuery.of(context).size.width * 0.9, 
 
-          child: GridView.builder(
-              scrollDirection: Axis.vertical,
-            itemCount:20,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
-            itemBuilder: (BuildContext context, int index){
-
-          
-              
-              return Container(
-                decoration: BoxDecoration(
-                  shape:BoxShape.rectangle,
-                   color:Colors.white,
-                   borderRadius: BorderRadius.all(Radius.circular(16)),
-                      boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 0),
-                                    color: Color(0x668CC598),
-                                    blurRadius: 5
-                                  )
-                                ]
-                ),
-                
-                 child: Column(
-                   mainAxisSize: MainAxisSize.max,
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: <Widget>[
-                   
-                   
-                    CircleAvatar(
-                      radius: 40,
-
-                    ),
-                    Text('data'),
-                    Text('data'),
-              //           Align(
-              //   alignment: Alignment.bottomCenter,
-              //   child: Text('Nutrients & Suplements',
-              //   style: TextStyle(fontSize: 15),),
-              // )
-                
-
-                 ],
-                 ),
-                 
-
-                  
-              );
-            }
-
-          
-
-
-        )),
-  
-  ],
+          child: GridSelector()
+          )],
       ),
 );
     
