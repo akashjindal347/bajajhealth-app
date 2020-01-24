@@ -7,13 +7,12 @@ class AppModel extends Model {
   Map <String, dynamic> _userInfo;
 
   String get token => _token;
-  String get gToken => _token;
+  String get gToken => _gToken;
   String get userId => _userId;
   Map <String, dynamic> get userInfo => _userInfo;
 
   void setToken (String t) async {
     _token = t;
-
     notifyListeners();
   }
 

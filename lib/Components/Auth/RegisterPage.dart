@@ -75,11 +75,11 @@ class _RegisterPageState extends State<RegisterPage> {
           Scaffold.of(context).showSnackBar(SnackBar(content: Text('Network Error!, Please try again later!'),));
           return;
         }
-        var id = res.data['createUser']['id'];
+        var id = res.data['createUser']['userId'];
         var token = res.data['createUser']['token'];
         ScopedModel.of<AppModel>(context).setgToken(gToken);
         ScopedModel.of<AppModel>(context).setToken(token);
-        ScopedModel.of<AppModel>(context).setUserId(res.data['createUser']['id']);
+        ScopedModel.of<AppModel>(context).setUserId(res.data['createUser']['userId']);
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('token', token);
         preferences.setString('userId', id);

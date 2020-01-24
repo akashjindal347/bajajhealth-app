@@ -4,8 +4,13 @@ import 'package:bajajhealthapp/Models/AppModel.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart'
+    show GoogleSignIn, GoogleSignInAccount;
 
 class Dashboard extends StatefulWidget {
+  final setGToken;
+  Dashboard({this.setGToken});
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -21,6 +26,33 @@ class _DashboardState extends State<Dashboard> {
   onCarouselChange (indx) {
     setState(() {
       carouselIndex = indx;
+    });
+  }
+
+  reSync () async {
+    final _googleSignIn = new GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+        'https://www.googleapis.com/auth/fitness.activity.read',
+        'https://www.googleapis.com/auth/fitness.blood_glucose.read',
+        'https://www.googleapis.com/auth/fitness.blood_pressure.read',
+        'https://www.googleapis.com/auth/fitness.body.read',
+        'https://www.googleapis.com/auth/fitness.body_temperature.read',
+        'https://www.googleapis.com/auth/fitness.location.read',
+        'https://www.googleapis.com/auth/fitness.nutrition.read',
+        'https://www.googleapis.com/auth/fitness.oxygen_saturation.read',
+        'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+      ],
+    );
+    await _googleSignIn.signIn();
+    await _googleSignIn.currentUser.authHeaders.then((res) async {
+      print('token');
+      print(res['Authorization'].split(' ')[1]);
+      ScopedModel.of<AppModel>(context).setgToken(res['Authorization'].split(' ')[1]);
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString('gToken', res['Authorization'].split(' ')[1]);
+      widget.setGToken(res['Authorization'].split(' ')[1]);
     });
   }
 
@@ -172,6 +204,7 @@ class _DashboardState extends State<Dashboard> {
                               Padding(
                                 padding: EdgeInsets.only(left: 132, top: 16),
                                 child: Container(
+                                  padding: EdgeInsets.only(top: 6, right: 12),
                                   height: 50,
                                   width: MediaQuery.of(context).size.width * 0.4,
                                   decoration: BoxDecoration(
@@ -185,11 +218,28 @@ class _DashboardState extends State<Dashboard> {
                                       )
                                     ]
                                   ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'BMI: ' + ScopedModel.of<AppModel>(context).userInfo['getUser']['bmi'].toStringAsFixed(2),
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontFamily: 'Raleway',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700
+                                        ),
+                                      ),
+                                    ]
+                                  ),
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 32, top: 16),
                                 child: Container(
+                                  padding: EdgeInsets.only(top: 6),
                                   height: 50,
                                   width: MediaQuery.of(context).size.width * 0.4,
                                   decoration: BoxDecoration(
@@ -201,6 +251,22 @@ class _DashboardState extends State<Dashboard> {
                                         color: Color(0xFF77CABC),
                                         blurRadius: 4
                                       )
+                                    ]
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'HealthIndex ' + ScopedModel.of<AppModel>(context).userInfo['getUser']['healthIndex'].toStringAsFixed(2),
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 16,
+                                          fontFamily: 'Raleway',
+                                          fontWeight: FontWeight.w700
+                                        ),
+                                      ),
                                     ]
                                   ),
                                 ),
@@ -209,9 +275,6 @@ class _DashboardState extends State<Dashboard> {
                                 padding: EdgeInsets.only(left: 16, bottom: 8, right: 16, top: 46),
                                 child: Container(
                                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                  constraints: BoxConstraints(
-
-                                  ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(12)),
                                     boxShadow: [
@@ -539,12 +602,39 @@ class _DashboardState extends State<Dashboard> {
               Expanded(
                 flex: 1,
                 child: Container(
-                  padding: EdgeInsets.only(right: 16, bottom: 4),
+                  padding: EdgeInsets.only(left: 16,right: 16, bottom: 4),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    // mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      MaterialButton(
+                        padding: EdgeInsets.all(0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.refresh,
+                              color: Theme.of(context).primaryColor,
+                              size: 32,
+                            ),
+                            Text(
+                              'ReSync',
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 16
+                              ),
+                            )
+                          ],
+                        ),
+                        onPressed: reSync,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(),
+                      ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.55,
                         child: Text(

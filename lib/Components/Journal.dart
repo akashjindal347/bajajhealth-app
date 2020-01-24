@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class Journal extends StatefulWidget {
   @override
@@ -6,6 +7,51 @@ class Journal extends StatefulWidget {
 }
 
 class _JournalState extends State<Journal> {
+
+  int dietTime = 0;
+
+  changeFoodTime (int selection) {
+    setState(() {
+      dietTime = selection;
+    });
+  }
+
+  addDiet () {
+    GraphQLProvider.of(context).value.query(
+      QueryOptions(document: """
+        query addDiet () {
+          mutation addDiet () {
+            
+          }
+        }
+      """)
+    ).then((res) async {
+      if(res.errors != null) {
+        print('Error adding the diet data: ');
+        print(res.errors);
+        return;
+      }
+      else {
+        print('Success adding the data: ');
+        print(res.data);
+        // SharedPreferences preferences = await SharedPreferences.getInstance();
+        // preferences.setString('userInfo', json.encode(res.data));
+        // ScopedModel.of<AppModel>(context).setUserInfo(res.data);
+        // var savedToken = preferences.getString('token');
+        // var savedUserId = preferences.getString('userId');
+        // var gToken = preferences.getString('gToken');
+        // if(ScopedModel.of<AppModel>(context).token == null) {
+        // print('GTOKEN');
+        // print(gToken);
+        // print(savedToken);
+        // print(savedUserId);
+        // ScopedModel.of<AppModel>(context).setToken(savedToken);
+        // ScopedModel.of<AppModel>(context).setUserId(savedUserId);
+        // ScopedModel.of<AppModel>(context).setgToken(gToken);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -278,75 +324,179 @@ class _JournalState extends State<Journal> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(48), topRight: Radius.circular(16), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFAB87CE),
-                              Color(0xFFF95BBE),
+                      GestureDetector(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(48), topRight: Radius.circular(16), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFAB87CE),
+                                Color(0xFFF95BBE),
+                              ],
+                              begin: Alignment.bottomLeft
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 5),
+                                blurRadius: 15,
+                                color: Color(0x668CC598)
+                              )
                             ],
-                            begin: Alignment.bottomLeft
+                            border: dietTime == 0 ? Border.all(
+                              width: 5,
+                              color: Colors.white
+                            ) : null
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(0, 5),
-                              blurRadius: 15,
-                              color: Color(0x668CC598)
-                            )
-                          ]
+                          width: MediaQuery.of(context).size.width * 0.275,
+                          height: MediaQuery.of(context).size.height * 0.125,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text('690' + ' cal',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 16
+                                ),
+                              ),
+                              Text('Breakfast',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Raleway',
+                                  fontSize: 16
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        width: MediaQuery.of(context).size.width * 0.275,
-                        height: MediaQuery.of(context).size.height * 0.125,
+                        onTap: () {changeFoodTime(0);},
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(48), topRight: Radius.circular(16), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFFDA67A),
-                              Color(0xFFFED891),
+                      GestureDetector(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(48), topRight: Radius.circular(16), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFFDA67A),
+                                Color(0xFFFED891),
+                              ],
+                              begin: Alignment.bottomLeft
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 5),
+                                blurRadius: 15,
+                                color: Color(0x668CC598)
+                              )
                             ],
-                            begin: Alignment.bottomLeft
+                            border: dietTime == 1 ? Border.all(
+                              width: 5,
+                              color: Colors.white
+                            ) : null
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(0, 5),
-                              blurRadius: 15,
-                              color: Color(0x668CC598)
-                            )
-                          ]
+                          width: MediaQuery.of(context).size.width * 0.275,
+                          height: MediaQuery.of(context).size.height * 0.125,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text('690' + ' cal',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 16
+                                ),
+                              ),
+                              Text('Lunch',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Raleway',
+                                  fontSize: 20
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        width: MediaQuery.of(context).size.width * 0.275,
-                        height: MediaQuery.of(context).size.height * 0.125,
+                        onTap: () {changeFoodTime(1);},
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(48), topRight: Radius.circular(16), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFF75FF77),
-                              Color(0xFF32FFBE),
+                      GestureDetector(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(48), topRight: Radius.circular(16), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFF75FF77),
+                                Color(0xFF32FFBE),
+                              ],
+                              begin: Alignment.bottomLeft
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 5),
+                                blurRadius: 15,
+                                color: Color(0x668CC598)
+                              )
                             ],
-                            begin: Alignment.bottomLeft
+                            border: dietTime == 2 ? Border.all(
+                              width: 5,
+                              color: Colors.white
+                            ) : null
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(0, 5),
-                              blurRadius: 15,
-                              color: Color(0x668CC598)
-                            )
-                          ]
+                          width: MediaQuery.of(context).size.width * 0.275,
+                          height: MediaQuery.of(context).size.height * 0.125,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text('690' + ' cal',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 16
+                                ),
+                              ),
+                              Text('Dinner',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Raleway',
+                                  fontSize: 16
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        width: MediaQuery.of(context).size.width * 0.275,
-                        height: MediaQuery.of(context).size.height * 0.125,
+                        onTap: () {changeFoodTime(2);},
                       )
                     ],
                   ),
-                  Text(
-                    'BreakFast',
+                  dietTime == 0 ? Text(
+                    'Breakfast',
                     style: TextStyle(
                       color: Color(0xFF9B51E0),
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20
+                    ),
+                  ) : dietTime == 1 ? Text(
+                    'Lunch',
+                    style: TextStyle(
+                      color: Color(0xFFFEB681),
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Raleway',
+                      fontSize: 20
+                    ),
+                  ) : Text(
+                    'Dinner',
+                    style: TextStyle(
+                      color: Color(0xFF51FF84),
+                      fontWeight: FontWeight.w700,
                       fontFamily: 'Raleway',
                       fontSize: 20
                     ),

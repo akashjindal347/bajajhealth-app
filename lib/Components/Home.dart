@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
   String gToken;
   String token;
   String userId;
-  String userInfo;
+  var userInfo;
 
   changeIndex (int indx) {
     setState(() {
@@ -42,10 +42,16 @@ class _HomeState extends State<Home> {
 
   setData () {
     setState(() {
-      id: ScopedModel.of<AppModel>(context).userId;
-      token: ScopedModel.of<AppModel>(context).token;
-      gToken: ScopedModel.of<AppModel>(context).gToken;
-      userInfo: ScopedModel.of<AppModel>(context).userInfo;
+      userId = ScopedModel.of<AppModel>(context).userId;
+      token = ScopedModel.of<AppModel>(context).token;
+      gToken = ScopedModel.of<AppModel>(context).gToken;
+      userInfo = ScopedModel.of<AppModel>(context).userInfo;
+    });
+  }
+
+  setGToken (String tok) {
+    setState(() {
+      gToken = tok;
     });
   }
 
@@ -76,28 +82,26 @@ class _HomeState extends State<Home> {
         print(res.errors);
         return;
       }
-      else { 
+      else {
         print('Success logging in: ');
         print(res.data);
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('userInfo', json.encode(res.data));
         ScopedModel.of<AppModel>(context).setUserInfo(res.data);
-        if(ScopedModel.of<AppModel>(context).token == null) {
-          var savedToken = preferences.getString('token');
-          var savedUserId = preferences.getString('userId');
-          var gToken = preferences.getString('gToken');
-          ScopedModel.of<AppModel>(context).setToken(savedToken);
-          ScopedModel.of<AppModel>(context).setUserId(savedUserId);
-          ScopedModel.of<AppModel>(context).setgToken(gToken);
-        }
+        var savedToken = preferences.getString('token');
+        var savedUserId = preferences.getString('userId');
+        var savedGToken = preferences.getString('gToken');
+        // if(ScopedModel.of<AppModel>(context).token == null) {
+        ScopedModel.of<AppModel>(context).setToken(savedToken);
+        ScopedModel.of<AppModel>(context).setUserId(savedUserId);
+        ScopedModel.of<AppModel>(context).setgToken(savedGToken);
+        setData();
       }
     });
-    setData();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     homePageController = new PageController();
     Future.delayed(Duration(milliseconds: (600)), () {
@@ -107,8 +111,11 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
-    print('Not so Scoped');
-    print(ScopedModel.of<AppModel>(context).gToken);
+    print('GTOKEN');
+    print(gToken);
+    print(token);
+    print(userId);
+    print(userInfo);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
@@ -166,7 +173,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(23)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                    child: Dashboard(),
+                    child: Dashboard(setGToken: setGToken,),
                   ),
                   Container(
                     decoration: BoxDecoration(
