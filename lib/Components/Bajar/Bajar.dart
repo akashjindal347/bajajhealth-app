@@ -14,11 +14,162 @@ class _BajarState extends State<Bajar>{
   List<String> images = ["https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any"];
 
 
+List<Map <String, dynamic>> offers = [
+    {
+      'backImg': '',
+      'name':['eqrqrq3r','wfqwfQFW','FQfqFQfqFqf','ffqEFQefqEFF','WFQEFEFQEFQEFEFQEF'],
+      'reqHP': '',
+      'description': ''
+    }
+  ];
+
+ void list_items(String backImg,){
+
+ }
+
+
+
+
+
 searchSet (String text) {
     if(text != '' && text != null) {
       setState(() {
         isSearching = true;
       });
+    }
+  }
+
+  
+  String challengeSelection = 'Ongoing';
+  int grid=0;
+
+  changeChallengeSelection (String selection) {
+    setState(() {
+      challengeSelection = selection;
+    });
+  }
+
+  changeGrid(int gridselected){
+    setState((){
+         grid= gridselected;
+    }
+
+    );
+  }
+
+  Widget GridSelector () {
+    if (grid == 1) {
+      return GridView.builder(
+              scrollDirection: Axis.vertical,
+            itemCount:20,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
+            itemBuilder: (BuildContext context, int index){
+
+              return Container(
+                decoration: BoxDecoration(
+                  shape:BoxShape.rectangle,
+                   color:Colors.white,
+                   borderRadius: BorderRadius.all(Radius.circular(16)),
+                      boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 0),
+                                    color: Color(0x668CC598),
+                                    blurRadius: 5
+                                  )
+                                ]
+                ),
+                
+                 child: Column(
+                   mainAxisSize: MainAxisSize.max,
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   children: <Widget>[
+                   
+                   
+                    CircleAvatar(
+                      radius: 40,
+
+                    ),
+                    Text('ITEM',
+                    style: TextStyle(fontSize: 25),),
+                    Text('cost',
+                    style:TextStyle(fontSize: 20)),
+              //           Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Text('Nutrients & Suplements',
+              //   style: TextStyle(fontSize: 15),),
+              // )
+                
+
+                 ],
+                 ),
+                 
+
+                  
+              );
+            }
+
+
+          
+
+
+        );
+  
+    }
+    else {
+      return GridView.builder(
+              scrollDirection: Axis.vertical,
+            itemCount:20,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
+            itemBuilder: (BuildContext context, int index){
+
+              return Container(
+                decoration: BoxDecoration(
+                  shape:BoxShape.rectangle,
+                   color:Colors.white,
+                   borderRadius: BorderRadius.all(Radius.circular(16)),
+                      boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 0),
+                                    color: Color(0x668CC598),
+                                    blurRadius: 5
+                                  )
+                                ]
+                ),
+                
+                 child: Column(
+                   mainAxisSize: MainAxisSize.max,
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   children: <Widget>[
+                   
+                   
+                    CircleAvatar(
+                      radius: 40,
+
+                    ),
+                    Text('ITE',
+                    style: TextStyle(fontSize: 25),),
+                    Text('cost',
+                    style:TextStyle(fontSize: 20)),
+              //           Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Text('Nutrients & Suplements',
+              //   style: TextStyle(fontSize: 15),),
+              // )
+                
+
+                 ],
+                 ),
+                 
+
+                  
+              );
+            }
+
+          
+
+
+        );
+  
     }
   }
 
@@ -56,62 +207,111 @@ searchSet (String text) {
             ),
           ),
        
-  SizedBox(height: 10),        
+
+ Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        height: 45,
+                        padding: EdgeInsets.only(top: 15),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).scaffoldBackgroundColor,
+                                borderRadius: BorderRadius.all(Radius.circular(16)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 0),
+                                    color: Color(0x668CC598),
+                                    blurRadius: 5
+                                  )
+                                ]
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex:1 ,
+                                    child: Center(
+                                      child: MaterialButton(
+                                        child: Text(
+                                          'Ongoing',
+                                          style: TextStyle(
+                                            fontFamily: 'Raleway',
+                                            fontSize: 18
+                                          ),
+                                        ),
+                                        onPressed: () {changeChallengeSelection('Ongoing');
+                                                        changeGrid(0);},
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: MaterialButton(
+                                        child: Text(
+                                          'Completed',
+                                          style: TextStyle(
+                                            fontFamily: 'Raleway',
+                                            fontSize: 16.125
+                                          ),
+                                        ),
+                                        onPressed: () {changeChallengeSelection('Completed');
+                                                        changeGrid(1);},
+                                      ),
+                                    )
+                                  )
+                                ],
+                              ),
+                            ),
+                            AnimatedContainer(
+                              alignment: Alignment(-0.75,0),
+                              duration: Duration(milliseconds: 500),
+                              padding: challengeSelection == 'Completed' ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.335) : EdgeInsets.only(left: 0),
+                              child: Container(
+                                height: 30,
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius: BorderRadius.all(Radius.circular(16))
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    challengeSelection == 'Ongoing' ? 'Ongoing' : 'Completed',
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 18,
+                                      color: Colors.white
+                                    )
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                      
+                  SizedBox(height: 10),          
+         
 
         
           Container(
-              height: MediaQuery.of(context).size.height *0.7,
+              height: MediaQuery.of(context).size.height *0.65,
           width: MediaQuery.of(context).size.width * 0.9, 
 
-          child: GridView.builder(
-              scrollDirection: Axis.vertical,
-            itemCount: images.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 5.0, mainAxisSpacing: 5.0),
-            itemBuilder: (BuildContext context, int index){
-              
-              
-              return Container(
-                decoration: BoxDecoration(
-                  shape:BoxShape.rectangle,
-                   color:Colors.white,
-                   borderRadius: BorderRadius.all(Radius.circular(16))
-                ),
-                 child: Column(
-                   children: <Widget>[
-                  Align( 
-                    alignment:Alignment(0.0,-0.5),  
-                    child:Container(
-                      
-                         height: MediaQuery.of(context).size.height *0.2,
-                          width: MediaQuery.of(context).size.width * 0.2, 
-                          
-                       decoration: BoxDecoration(
-                         shape:BoxShape.circle,
-                         color:Colors.grey,
-                         
-                        )  
-                        )),
-                        Align(
-                alignment: Alignment.bottomCenter,
-                child: Text('Nutrients & Suplements',
-                style: TextStyle(fontSize: 15),),
-              )
-                
-
-                 ],
-                 ),
-                 
-
-                  
-              );
-            }
-
-          
-
-
-        )),
-  
-  ],
+          child: GridSelector()
+          )],
       ),
 );
     
@@ -120,14 +320,7 @@ searchSet (String text) {
 }
   
 
-//   List<Map <String, dynamic>> offers = [
-//     {
-//       'backImg': '',
-//       'name': '',
-//       'reqHP': '',
-//       'description': ''
-//     }
-//   ];
+  
 
 //   searchSet (String text) {
 //     if(text != '' && text != null) {
