@@ -94,7 +94,9 @@ class NavButton extends StatelessWidget {
           Text(
             selectionMap[index],
             style: TextStyle(
-              color: Theme.of(context).primaryColor
+              color: Theme.of(context).primaryColor,
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.w700
             ),
           ) 
         ],
