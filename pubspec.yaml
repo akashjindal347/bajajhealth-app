@@ -55,6 +55,7 @@ flutter:
    - assets/img/branding/header.png
    - assets/img/dashboard/blob.png
    - assets/img/dashboard/person.png
+   - assets/display.jpg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
