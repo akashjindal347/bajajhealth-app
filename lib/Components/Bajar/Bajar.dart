@@ -14,7 +14,7 @@ class _BajarState extends State<Bajar>{
   List<String> images = ["https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any"];
 
 
-List<Map <String, dynamic>> offers = [
+  List<Map <String, dynamic>> offers = [
     {
       'backImg': '',
       'name':['eqrqrq3r','wfqwfQFW','FQfqFQfqFqf','ffqEFQefqEFF','WFQEFEFQEFQEFEFQEF'],
@@ -23,15 +23,11 @@ List<Map <String, dynamic>> offers = [
     }
   ];
 
- void list_items(String backImg,){
+  void list_items(String backImg,){
 
- }
+  }
 
-
-
-
-
-searchSet (String text) {
+  searchSet (String text) {
     if(text != '' && text != null) {
       setState(() {
         isSearching = true;
@@ -52,18 +48,16 @@ searchSet (String text) {
   changeGrid(int gridselected){
     setState((){
          grid= gridselected;
-    }
-
-    );
+    });
   }
 
   Widget GridSelector () {
     if (grid == 1) {
       return GridView.builder(
-              scrollDirection: Axis.vertical,
-            itemCount:20,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
-            itemBuilder: (BuildContext context, int index){
+        scrollDirection: Axis.vertical,
+        itemCount:20,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing:10),
+        itemBuilder: (BuildContext context, int index){
 
               return Container(
                 decoration: BoxDecoration(
@@ -243,13 +237,13 @@ searchSet (String text) {
                                     child: Center(
                                       child: MaterialButton(
                                         child: Text(
-                                          'Ongoing',
+                                          'Products',
                                           style: TextStyle(
                                             fontFamily: 'Raleway',
-                                            fontSize: 18
+                                            fontSize: 14
                                           ),
                                         ),
-                                        onPressed: () {changeChallengeSelection('Ongoing');
+                                        onPressed: () {changeChallengeSelection('Products');
                                                         changeGrid(0);},
                                       ),
                                     ),
@@ -259,13 +253,13 @@ searchSet (String text) {
                                     child: Center(
                                       child: MaterialButton(
                                         child: Text(
-                                          'Completed',
+                                          'Insurance',
                                           style: TextStyle(
                                             fontFamily: 'Raleway',
-                                            fontSize: 16.125
+                                            fontSize: 14
                                           ),
                                         ),
-                                        onPressed: () {changeChallengeSelection('Completed');
+                                        onPressed: () {changeChallengeSelection('Insurance');
                                                         changeGrid(1);},
                                       ),
                                     )
@@ -276,7 +270,7 @@ searchSet (String text) {
                             AnimatedContainer(
                               alignment: Alignment(-0.75,0),
                               duration: Duration(milliseconds: 500),
-                              padding: challengeSelection == 'Completed' ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.335) : EdgeInsets.only(left: 0),
+                              padding: challengeSelection == 'Insurance' ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.335) : EdgeInsets.only(left: 0),
                               child: Container(
                                 height: 30,
                                 width: MediaQuery.of(context).size.width * 0.25,
@@ -286,10 +280,10 @@ searchSet (String text) {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    challengeSelection == 'Ongoing' ? 'Ongoing' : 'Completed',
+                                    challengeSelection == 'Products' ? 'Products' : 'Insurance',
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       color: Colors.white
                                     )
                                   ),

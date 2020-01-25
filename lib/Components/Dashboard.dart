@@ -115,7 +115,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    var isLoading = false;
+    var isLoading = true;
     if(ScopedModel.of<AppModel>(context).token != null) {
       isLoading = false;
     }
@@ -157,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
                                 fontWeight: FontWeight.w700
                               ),
                             ),
-                            Text('Aadi',
+                            Text(ScopedModel.of<AppModel>(context).userInfo['getUser']['name'],
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontFamily: 'Raleway',

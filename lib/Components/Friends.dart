@@ -23,16 +23,20 @@ class _FriendsState extends State<Friends> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Friends',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontFamily: 'Raleway',
-              fontSize: 40,
+          Padding(
+            padding: EdgeInsets.only(top: 8, left: 16),
+            child: Text('Friends',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontFamily: 'Raleway',
+                fontWeight: FontWeight.w700,
+                fontSize: 40,
+              ),
             ),
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery.of(context).size.height * 0.24,
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -96,7 +100,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Muskan',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -116,7 +120,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Arushi',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -136,7 +140,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Dhawal',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -160,7 +164,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Ninja',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -180,7 +184,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Rohit',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -200,7 +204,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Akash',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -220,7 +224,7 @@ class _FriendsState extends State<Friends> {
                                       backgroundColor: Colors.grey,
                                       radius: 24,
                                     ),
-                                    Text('Aditya',
+                                    Text('Shruti',
                                       style: TextStyle(
                                         color: Color(0xFF444444),
                                         fontFamily: 'Raleway',
@@ -283,13 +287,16 @@ class _FriendsState extends State<Friends> {
               ],
             ),
           ),
-          Text(
+          Padding(
+            padding: EdgeInsets.only(top: 8, left: 16),
+            child: Text(
             'New Challenges',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontWeight: FontWeight.w700,
-              fontFamily: 'Raleway',
-              fontSize: 32
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Raleway',
+                fontSize: 36
+              ),
             ),
           ),
           Container(
@@ -371,11 +378,12 @@ class _FriendsState extends State<Friends> {
                                     flex: 1,
                                     child: Center(
                                       child: MaterialButton(
+                                        padding: EdgeInsets.all(0),
                                         child: Text(
                                           'Ongoing',
                                           style: TextStyle(
                                             fontFamily: 'Raleway',
-                                            fontSize: 18
+                                            fontSize: 14
                                           ),
                                         ),
                                         onPressed: () {changeChallengeSelection('Ongoing');},
@@ -386,11 +394,12 @@ class _FriendsState extends State<Friends> {
                                     flex: 1,
                                     child: Center(
                                       child: MaterialButton(
+                                        padding: EdgeInsets.all(0),
                                         child: Text(
                                           'Completed',
                                           style: TextStyle(
                                             fontFamily: 'Raleway',
-                                            fontSize: 18
+                                            fontSize: 14
                                           ),
                                         ),
                                         onPressed: () {changeChallengeSelection('Completed');},
@@ -402,7 +411,7 @@ class _FriendsState extends State<Friends> {
                             ),
                             AnimatedContainer(
                               alignment: Alignment(-0.75,0),
-                              duration: Duration(milliseconds: 500),
+                              duration: Duration(milliseconds: 400),
                               padding: challengeSelection == 'Completed' ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.335) : EdgeInsets.only(left: 0),
                               child: Container(
                                 height: 30,
@@ -416,7 +425,7 @@ class _FriendsState extends State<Friends> {
                                     challengeSelection == 'Ongoing' ? 'Ongoing' : 'Completed',
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
-                                      fontSize: 18,
+                                      fontSize: 14,
                                       color: Colors.white
                                     )
                                   ),

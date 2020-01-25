@@ -206,6 +206,70 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.625, top: MediaQuery.of(context).size.height * 0.019),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.375,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width * 0.375,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(16), bottomLeft: Radius.circular(16)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(-2, 0),
+                            color: Color(0x668CC598),
+                            blurRadius: 5
+                          )
+                        ]
+                      ),
+                      child: Center(
+                        child: Text('3000 HP',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).primaryColor
+                          ),
+                        ),
+                      )
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width * 0.275,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(16), bottomLeft: Radius.circular(16)),
+                        color: Theme.of(context).primaryColor,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(-2, 0),
+                            color: Color(0x668CC598),
+                            blurRadius: 5
+                          )
+                        ]
+                      ),
+                      child: Center(
+                        child: Text('2500 BP',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      )
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         )
       ),

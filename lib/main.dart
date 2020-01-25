@@ -61,7 +61,7 @@ class BajajHealthApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Bajaj Health',
         theme: baseTheme(),
-        home: token == null ? Home() : Pedestal(),
+        home: token != null ? Home() : Pedestal(),
         routes: {
           '/auth': (BuildContext context) => AuthPage(),
           '/home': (BuildContext context) => Home(),
