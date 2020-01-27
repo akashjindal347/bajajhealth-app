@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class Journal extends StatefulWidget {
+  final changePane;
+  final changeDietType;
+  Journal({this.changePane, this.changeDietType});
   @override
   _JournalState createState() => _JournalState();
 }
@@ -14,6 +17,7 @@ class _JournalState extends State<Journal> {
     setState(() {
       dietTime = selection;
     });
+    widget.changeDietType(selection);
   }
 
   addDiet () {
@@ -21,7 +25,7 @@ class _JournalState extends State<Journal> {
       QueryOptions(document: """
         query addDiet () {
           mutation addDiet () {
-            
+
           }
         }
       """)
@@ -277,7 +281,7 @@ class _JournalState extends State<Journal> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Text('',
+                                  Text('Add Clinical Data to gain extra reward points',
                                     style: TextStyle(
                                       color: Theme.of(context).primaryColor,
                                       
@@ -541,7 +545,9 @@ class _JournalState extends State<Journal> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          widget.changePane('addDiet');
+                        },
                         child: Icon(
                           Icons.add_circle_outline,
                           size: 24,

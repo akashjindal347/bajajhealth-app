@@ -11,6 +11,7 @@ import './Journal.dart';
 import '../Models/AppModel.dart';
 import './Dashboard.dart';
 import 'dart:convert';
+import './Dashsheet.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -21,6 +22,59 @@ class _HomeState extends State<Home> {
   
   int index = 0;
   PageController homePageController;
+
+  int dietType = 0;
+
+  changeDietType (val) {
+    setState(() {
+      dietType = val;
+    });
+  }
+
+  String bP = '3500 BP';
+
+  List challenges = [
+    {
+      "type": "Steps",
+      "name": "Complete 1500 Steps",
+      "progress": "1567"
+    },
+    {
+      "type": "Calorie",
+      "name": "Consume 2500 cal",
+      "progress": "450"
+    },
+    {
+      "type": "Arbitrary",
+      "name": "Update Weight",
+      "progress": "Nil"
+    }
+  ];
+
+  List diets = [
+    {
+      'type': 0,
+      'name': 'Aalo Parantha',
+      'quantity': 63,
+      'value': 2
+    }
+  ];
+
+  addChallenge (obj) {
+    challenges.add(obj);
+  }
+
+  addDiet (val) {
+    diets.add(val);
+  }
+
+  String _selectedPane = 'UNSET';
+
+  changePane (String newPane) {
+    setState(() {
+      _selectedPane = newPane;
+    });
+  }
 
   String gToken;
   String token;
@@ -52,6 +106,12 @@ class _HomeState extends State<Home> {
   setGToken (String tok) {
     setState(() {
       gToken = tok;
+    });
+  }
+
+  setBP (String bp) {
+    setState(() {
+      bP = bp;
     });
   }
 
@@ -180,21 +240,21 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                    child: Journal(),
+                    child: Journal(changePane: changePane, changeDietType: changeDietType),
                   ),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                    child: Bajar(),
+                    child: Bajar(setBP: setBP,),
                   ),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                    child: Friends(),
+                    child: Friends(changePane: changePane, challenges: challenges, setBP: setBP),
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -256,7 +316,7 @@ class _HomeState extends State<Home> {
                         ]
                       ),
                       child: Center(
-                        child: Text('2500 BP',
+                        child: Text(bP,
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 20,
@@ -269,6 +329,10 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Dashsheet(selectedPane: _selectedPane, changePane: changePane, userInfo: ScopedModel.of<AppModel>(context).userInfo, addChallenge: addChallenge, dietType: dietType,)
             )
           ],
         )

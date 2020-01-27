@@ -224,7 +224,8 @@ class _DashboardState extends State<Dashboard> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'BMI: ' + ScopedModel.of<AppModel>(context).userInfo['getUser']['bmi'].toStringAsFixed(2),
+                                        // 'BMI: ' + ScopedModel.of<AppModel>(context).userInfo['getUser']['bmi'].toStringAsFixed(2),
+                                        'BMI: 21.5',
                                         style: TextStyle(
                                           color: Theme.of(context).primaryColor,
                                           fontFamily: 'Raleway',
@@ -259,7 +260,8 @@ class _DashboardState extends State<Dashboard> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'HealthIndex ' + ScopedModel.of<AppModel>(context).userInfo['getUser']['healthIndex'].toStringAsFixed(2),
+                                        // 'HealthIndex ' + ScopedModel.of<AppModel>(context).userInfo['getUser']['healthIndex'].toStringAsFixed(2),
+                                        'HealthIndex 94',
                                         style: TextStyle(
                                           color: Theme.of(context).accentColor,
                                           fontSize: 16,
@@ -498,7 +500,7 @@ class _DashboardState extends State<Dashboard> {
               Expanded(
                 flex: 6,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.all(8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -524,6 +526,7 @@ class _DashboardState extends State<Dashboard> {
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
+                                  padding: EdgeInsets.all(16),
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -545,6 +548,13 @@ class _DashboardState extends State<Dashboard> {
                                           fontFamily: 'Raleway',
                                           fontWeight: FontWeight.w600,
                                           fontSize: 24
+                                        ),
+                                      ),
+                                      Text('Raghav has sent you a chalenge to complete 5000 steps today',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Raleway',
+                                          fontSize: 16
                                         ),
                                       )
                                     ],
